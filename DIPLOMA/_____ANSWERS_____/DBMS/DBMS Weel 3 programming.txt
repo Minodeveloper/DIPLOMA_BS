@@ -1,0 +1,42 @@
+Q002flisdb:
+select m.match_num,r.name
+from match_referees as m, referees as r
+where m.referee=r.referee_id and m.match_num in(
+select match_num  
+from matches
+where match_date='2020-05-20')
+
+Q004flisdb:
+select name
+from players
+where dob =(select min(dob) from players) and team_id in(
+select team_id
+from teams
+where name='Arawali')
+
+
+Q002flisdb:
+select city,name
+from teams
+where team_id in (select team_id
+from players
+where jersey_no between 80 and 90)
+
+Q005lisdb:
+select s.department_code,m.member_type
+from students as s,members as m
+where s.roll_no=m.roll_no and m.member_no in (select member_no
+from book_issue
+where doi='2021-08-02')
+
+Q001lisdb:
+select title, count(bc_isbn_no) as total 
+from
+(select title,bc_isbn_no
+from
+(select * 
+from (select isbn_no as bc_isbn_no,title from book_catalogue) as A full join (select isbn_no as bcopy_isbn_no from book_copies ) as B
+on A.bc_isbn_no = B.bcopy_isbn_no) as XX
+where XX.title like '%Database%') as abc
+
+group by abc.title
