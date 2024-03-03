@@ -37,7 +37,7 @@ class Enrollments(db.Model):
         'course.course_id'), nullable=False)
 
 
-# Declare Flask Routes
+# Declare Flask Routes --------
 @app.route('/', methods=['GET'])
 def index():
     students = db.session.query(Student).all()
@@ -83,7 +83,7 @@ def update(student_id):
         update_student = db.session.query(
             Student).filter_by(student_id=student_id).first()
 
-        # Update Values in SQL
+        # Update Values in SQL -------
         update_student.first_name = first_name
         update_student.last_name = last_name
 
