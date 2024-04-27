@@ -12,8 +12,6 @@ db.init_app(app)
 app.app_context().push()
 
 # Declare Model
-
-
 class Student(db.Model):
     __tablename__ = 'student'
     student_id = db.Column(db.Integer, autoincrement=True, primary_key=True)
@@ -39,7 +37,6 @@ class Enrollment(db.Model):
         'course.course_id'), nullable=False)
 
 # Define Errors
-
 
 class NotFoundError(HTTPException):
     def __init__(self, status_code):
@@ -161,8 +158,7 @@ class CourseAPI(Resource):
         return new_course, 201
 
 
-####### STUDENT API #######
-
+####### STUDENT API 
 # Request Parser JSON
 student_request_parse = reqparse.RequestParser()
 student_request_parse.add_argument('first_name')
@@ -349,8 +345,7 @@ class EnrollmentAPI(Resource):
 
         return enrollment_details, 201
 
-####### Define API Routes #######
-
+####### Define API Routes 
 
 api.add_resource(CourseAPI, '/api/course', '/api/course/<int:course_id>')
 api.add_resource(StudentAPI, '/api/student', '/api/student/<int:student_id>')
